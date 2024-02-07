@@ -7,4 +7,5 @@
 4.最后将最新版分合并到自己本地仓库
 
 最新：
-1.一切修改先用dev分支，master先不管，最后再合并到master就行。
+1.一切修改先用dev分支。
+2.最后再git上先换到master，再用git merge dev合并，最后push到github上即可。
