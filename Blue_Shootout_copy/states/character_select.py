@@ -51,13 +51,12 @@ class CharacterSelect:
         self.continue_button_rect = pygame.Rect(0, 0, 150, 50) 
 
     def handle_clicks(self, mouse_click_position):
-        # First, check if the click is on the "Continue" button
         if self.continue_button_rect.collidepoint(mouse_click_position):
             self.continue_clicked = True
             print("Continue clicked, transitioning to the game...")
         else:
-            # If not, check for character selections
-            self.update_selection(mouse_click_position, 1)  # Assuming a single-player selection for simplicity
+            # For debugging: Print the position to verify click detection
+            print("Click position:", mouse_click_position) # Assuming a single-player selection for simplicity
 
         
     def draw_list(self, screen, list_pos_x, current_selection, player_number):
@@ -85,11 +84,9 @@ class CharacterSelect:
                                             image_rect.width + 20, image_rect.height + text_rect.height + 20)
                 pygame.draw.rect(screen, self.emphasis_color, emphasis_rect, 2)  # Draw emphasis border
             
-                for index, character in enumerate(self.characters):
-        # Your existing setup...
-        # Now, add a condition to draw emphasis for the selected character
-                    if index == current_selection:
-                        pygame.draw.rect(screen, self.emphasis_color, image_rect.inflate(20, 20), 2) 
+
+            if index == current_selection:
+                pygame.draw.rect(screen, self.emphasis_color, image_rect.inflate(20, 20), 2) 
 
         # If player_number is being used to differentiate between player1 and player2, ensure it's integrated correctly
 
@@ -112,23 +109,19 @@ class CharacterSelect:
                     self.player2_selection = index
                 return
 
-    def run(self, screen):
+    def run(self, screen, events):
+        self.continue_clicked = False
         screen.fill(self.bg_color)
-        self.continue_clicked = False  # Reset the click status at the start of each frame
 
-        # Process events
-        for event in pygame.event.get():
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # Handle all clicks directly in this loop
                 self.handle_clicks(event.pos)
 
-        # Draw the character selection list and the continue button
         self.draw_list(screen, self.list1_pos_x, self.player1_selection, 1)
         self.draw_list(screen, self.list2_pos_x, self.player2_selection, 2)
         self.draw_continue_button(screen)
 
         pygame.display.flip()
-
-        # Return 'game_screen' if the continue button was clicked
         return 'game_screen' if self.continue_clicked else None
+
 

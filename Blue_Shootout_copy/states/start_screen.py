@@ -15,7 +15,7 @@ class StartScreen:
         self.button_rect.center = (game_settings.screen_width // 2, game_settings.screen_height // 2 + 50)
         self.button_clicked = False  # Track if the button has been clicked
 
-    def run(self, screen):
+    def run(self, screen,events):
         screen.fill(self.bg_color)
         
         # Render the text

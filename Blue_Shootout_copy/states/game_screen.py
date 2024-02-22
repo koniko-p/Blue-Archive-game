@@ -5,7 +5,7 @@ class GameScreen:
         self.game_settings = game_settings
         self.bg_color = (255, 255, 255)  # Set the background color to white
 
-    def run(self, screen):
+    def run(self, screen,events):
         # Fill the screen with the background color
         screen.fill(self.bg_color)
         
